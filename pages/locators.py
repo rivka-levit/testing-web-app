@@ -26,3 +26,9 @@ class LoginPageLocators :
     REGISTER_PASSWORD_1 = (By.ID, "registration-password1")
     REGISTER_PASSWORD_2 = (By.ID, "registration-password2")
     BTN_REGISTER = (By.CSS_SELECTOR, "button[value='Register']")
+
+
+class ProductPageLocators :
+    """Locators for ProductPage class."""
+
+    BTN_ADD_TO_CART = (By.CSS_SELECTOR, "button.btn-add-to-basket")
