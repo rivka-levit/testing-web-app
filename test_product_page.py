@@ -4,7 +4,10 @@ Tests for product detail page.
 
 from pages.product_page import ProductPage
 
-LINK = 'http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear'
+LINK = 'http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/'
+
+# Link to solve course task
+# LINK = 'http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear'
 
 
 def test_product_info_is_visible(browser):

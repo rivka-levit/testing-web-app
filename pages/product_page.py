@@ -30,7 +30,7 @@ class ProductPage(BasePage):
     def add_to_cart(self):
         btn = self.browser.find_element(*self.locators.BTN_ADD_TO_CART)
         btn.click()
-        self.solve_quiz_and_get_code()
+        # self.solve_quiz_and_get_code()  # Is needed to solve the course task
 
     def should_be_correct_product_in_added_success_message(self):
         self.should_be_success_message()
