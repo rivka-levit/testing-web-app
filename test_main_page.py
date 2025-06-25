@@ -1,7 +1,7 @@
 from pages.main_page import MainPage
 
-# LINK = "http://selenium1py.pythonanywhere.com/"
-LINK = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209?promo=midsummer"
+LINK = "http://selenium1py.pythonanywhere.com/"
+# LINK = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209?promo=midsummer"
 
 
 def test_guest_can_go_to_login_page(browser):
