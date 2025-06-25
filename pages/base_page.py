@@ -12,7 +12,7 @@ class BasePage:
     def __init__(self,
                  browser: Chrome | Firefox,
                  url: str,
-                 timeout: int=10) -> None:
+                 timeout: int = 10) -> None:
         self.browser = browser
         self.url = url
         self.browser.implicitly_wait(timeout)
