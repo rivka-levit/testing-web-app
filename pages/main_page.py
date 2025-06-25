@@ -2,8 +2,6 @@
 Page Object class for main page.
 """
 
-from selenium.common.exceptions import NoSuchElementException
-
 from .base_page import BasePage
 from .locators import MainPageLocators
 
@@ -20,11 +18,3 @@ class MainPage(BasePage):
     def should_be_login_link(self):
         assert self.is_element_present(*self.locators.LOGIN_LINK), \
             "Login link was not found."
-
-    def is_element_present(self, by_attr, selector):
-        try:
-            self.browser.find_element(by_attr, selector)
-        except NoSuchElementException:
-            return False
-
-        return True

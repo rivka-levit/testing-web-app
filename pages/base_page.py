@@ -3,6 +3,7 @@ Base Page Object.
 """
 
 from selenium.webdriver import Chrome, Firefox
+from selenium.common.exceptions import NoSuchElementException
 
 
 class BasePage:
@@ -16,3 +17,11 @@ class BasePage:
 
     def open(self):
         self.browser.get(self.url)
+
+    def is_element_present(self, by_attr, selector):
+        try:
+            self.browser.find_element(by_attr, selector)
+        except NoSuchElementException:
+            return False
+
+        return True
