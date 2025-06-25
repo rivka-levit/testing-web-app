@@ -14,3 +14,4 @@ class ProductPage(BasePage):
     def add_to_cart(self):
         btn = self.browser.find_element(*self.locators.BTN_ADD_TO_CART)
         btn.click()
+        self.solve_quiz_and_get_code()
