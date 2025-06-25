@@ -11,8 +11,7 @@ from .locators import MainPageLocators
 class MainPage(BasePage):
     """Main page functionality."""
 
-    def __init__(self, browser, url):
-        super().__init__(browser, url, locators_type=MainPageLocators)
+    locators = MainPageLocators()
 
     def go_to_login_page(self):
         login_link = self.browser.find_element(*self.locators.LOGIN_LINK)
