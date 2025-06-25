@@ -11,14 +11,20 @@ LINK = 'http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook
 
 
 def test_product_info_is_visible(browser):
+    """Test the product info is displayed correctly."""
+
     page = ProductPage(browser, LINK)
     page.open()
     page.should_be_product_name()
     page.should_be_product_price()
 
-def test_guest_can_add_product_to_basket(browser):
+def test_guest_can_add_product_to_cart(browser):
+    """Test that guest can add product to the cart."""
+
     page = ProductPage(browser, LINK)
     page.open()
     page.add_to_cart()
-    page.should_be_correct_product_in_added_success_message()
-    page.should_cart_total_msg_match_product_price()
+    page.should_be_success_message()
+    page.should_be_correct_product_in_success_message()
+    page.should_be_cart_total_message()
+    page.should_match_cart_total_msg_to_product_price()

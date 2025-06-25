@@ -32,8 +32,7 @@ class ProductPage(BasePage):
         btn.click()
         # self.solve_quiz_and_get_code()  # Is needed to solve the course task
 
-    def should_be_correct_product_in_added_success_message(self):
-        self.should_be_success_message()
+    def should_be_correct_product_in_success_message(self):
         msg = self.browser.find_element(*ProductPageLocators.SUCCESS_MESSAGE)
         product_name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME)
 
@@ -41,8 +40,7 @@ class ProductPage(BasePage):
         assert product_name.text in msg.text, \
             "Product name does not match."
 
-    def should_cart_total_msg_match_product_price(self):
-        self.should_be_cart_total_message()
+    def should_match_cart_total_msg_to_product_price(self):
         msg = self.browser.find_element(*ProductPageLocators.PRICE_MESSAGE)
         product_price = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE)
 
