@@ -5,7 +5,11 @@ Base Page Object.
 import math
 
 from selenium.webdriver import Chrome, Firefox
-from selenium.common.exceptions import NoSuchElementException, NoAlertPresentException
+from selenium.webdriver.support import expected_conditions as EC  # noqa
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common.exceptions import (NoSuchElementException,
+                                        NoAlertPresentException,
+                                        TimeoutException)
 
 
 class BasePage:
@@ -20,10 +24,30 @@ class BasePage:
     def open(self):
         self.browser.get(self.url)
 
-    def is_element_present(self, by_attr, selector):
+    def is_element_present(self, by_attr, selector) -> bool:
         try:
             self.browser.find_element(by_attr, selector)
         except NoSuchElementException:
+            return False
+
+        return True
+
+    def is_not_element_present(self, by_attr, selector) -> bool:
+        try:
+            WebDriverWait(self.browser, timeout=4).until(
+                EC.presence_of_element_located((by_attr, selector))
+            )
+        except TimeoutException:
+            return True
+
+        return False
+
+    def is_disappeared(self, how, what, timeout=4):
+        try:
+            WebDriverWait(self.browser, timeout, poll_frequency=1).until_not(
+                EC.presence_of_element_located((how, what))
+            )
+        except TimeoutException:
             return False
 
         return True

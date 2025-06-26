@@ -52,3 +52,7 @@ class ProductPage(BasePage):
 
         assert product_price == message_cart_price, ("Cart total does not match "
                                                      "to product price.")
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be."
