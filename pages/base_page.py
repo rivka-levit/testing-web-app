@@ -28,6 +28,10 @@ class BasePage:
         if timeout:
             self.browser.implicitly_wait(timeout)
 
+    def go_to_cart_page(self):
+        cart_link = self.browser.find_element(*self.locators.CART_LINK)
+        cart_link.click()
+
     def go_to_login_page(self):
         login_link = self.browser.find_element(*self.locators.LOGIN_LINK)
         login_link.click()
@@ -62,6 +66,10 @@ class BasePage:
 
     def open(self):
         self.browser.get(self.url)
+
+    def should_be_cart_link(self):
+        assert self.is_element_present(*self.locators.CART_LINK), \
+            "Cart link was not found."
 
     def should_be_login_link(self):
         assert self.is_element_present(*self.locators.LOGIN_LINK), \

@@ -10,6 +10,7 @@ class BasePageLocators:
 
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
+    CART_LINK = (By.CSS_SELECTOR, "header .page_inner a.btn")
 
 
 class MainPageLocators(BasePageLocators):
@@ -43,3 +44,9 @@ class ProductPageLocators(BasePageLocators):
     SUCCESS_MESSAGE_PRODUCT_NAME = (By.CSS_SELECTOR, ".alert-success .alertinner strong")
     PRICE_MESSAGE = (By.CSS_SELECTOR, ".alert-safe.alert-info")
     CART_MESSAGE_PRICE = (By.CSS_SELECTOR, ".alert-safe.alert-info .alertinner strong")
+
+
+class CartPageLocators(BasePageLocators):
+    """Locators for CartPage class."""
+
+    CART_ITEM = (By.CSS_SELECTOR, ".basket-items")
