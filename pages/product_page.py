@@ -30,19 +30,25 @@ class ProductPage(BasePage):
     def add_to_cart(self):
         btn = self.browser.find_element(*self.locators.BTN_ADD_TO_CART)
         btn.click()
-        # self.solve_quiz_and_get_code()  # Is needed to solve the course task
+        self.solve_quiz_and_get_code()  # Is needed to solve the course task
 
     def should_be_correct_product_in_success_message(self):
-        msg = self.browser.find_element(*ProductPageLocators.SUCCESS_MESSAGE)
-        product_name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME)
+        msg_product_name = self.browser.find_element(
+            *ProductPageLocators.SUCCESS_MESSAGE_PRODUCT_NAME
+        ).text
+        product_name = self.browser.find_element(
+            *ProductPageLocators.PRODUCT_NAME
+        ).text
 
-        assert msg.is_displayed(), "Success message is not visible."
-        assert product_name.text in msg.text, \
-            "Product name does not match."
+        assert product_name == msg_product_name, "Product name does not match."
 
     def should_match_cart_total_msg_to_product_price(self):
-        msg = self.browser.find_element(*ProductPageLocators.PRICE_MESSAGE)
-        product_price = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE)
+        message_cart_price = self.browser.find_element(
+            *ProductPageLocators.CART_MESSAGE_PRICE
+        ).text
+        product_price = self.browser.find_element(
+            *ProductPageLocators.PRODUCT_PRICE
+        ).text
 
-        assert product_price.is_displayed(), "Product price not displayed."
-        assert product_price.text in msg.text, "Cart total does not match to product price."
+        assert product_price == message_cart_price, ("Cart total does not match "
+                                                     "to product price.")
