@@ -24,5 +24,5 @@ class CartPage(BasePage):
             "Current url is wrong. It is not a cart page url."
 
     def should_be_empty_cart_text(self):
-        assert "Ваша корзина пуста" in self.browser.page_source, \
+        assert self.is_element_present(*self.locators.EMPTY_CART_TEXT), \
             "Empty cart text was not found."

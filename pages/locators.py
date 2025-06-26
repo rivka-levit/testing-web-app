@@ -50,3 +50,4 @@ class CartPageLocators(BasePageLocators):
     """Locators for CartPage class."""
 
     CART_ITEM = (By.CSS_SELECTOR, ".basket-items")
+    EMPTY_CART_TEXT = (By.CSS_SELECTOR, "#content_inner > p")
