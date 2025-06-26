@@ -1,7 +1,7 @@
 """
 Page Object class for single product page.
 """
-
+import time
 from .base_page import BasePage
 from .locators import ProductPageLocators
 
@@ -30,7 +30,7 @@ class ProductPage(BasePage):
     def add_to_cart(self):
         btn = self.browser.find_element(*self.locators.BTN_ADD_TO_CART)
         btn.click()
-        self.solve_quiz_and_get_code()  # Is needed to solve the course task
+        # self.solve_quiz_and_get_code()  # Is needed to solve the course task
 
     def should_be_correct_product_in_success_message(self):
         msg_product_name = self.browser.find_element(
@@ -56,3 +56,8 @@ class ProductPage(BasePage):
     def should_not_be_success_message(self):
         assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
             "Success message is presented, but should not be."
+
+    def should_disappear_success_message(self):
+        time.sleep(1)
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is not disappeared."

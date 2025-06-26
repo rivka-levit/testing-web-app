@@ -16,10 +16,11 @@ class BasePage:
     def __init__(self,
                  browser: Chrome | Firefox,
                  url: str,
-                 timeout: int = 10) -> None:
+                 timeout: int | None = 10) -> None:
         self.browser = browser
         self.url = url
-        self.browser.implicitly_wait(timeout)
+        if timeout:
+            self.browser.implicitly_wait(timeout)
 
     def open(self):
         self.browser.get(self.url)
@@ -42,10 +43,10 @@ class BasePage:
 
         return False
 
-    def is_disappeared(self, how, what, timeout=4):
+    def is_disappeared(self, by_attr, selector, timeout=4):
         try:
             WebDriverWait(self.browser, timeout, poll_frequency=1).until_not(
-                EC.presence_of_element_located((how, what))
+                EC.presence_of_element_located((by_attr, selector))
             )
         except TimeoutException:
             return False
