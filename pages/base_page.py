@@ -4,6 +4,8 @@ Base Page Object.
 
 import math
 
+from .locators import BasePageLocators
+
 from selenium.webdriver import Chrome, Firefox
 from selenium.webdriver.support import expected_conditions as EC  # noqa
 from selenium.webdriver.support.ui import WebDriverWait
@@ -13,6 +15,10 @@ from selenium.common.exceptions import (NoSuchElementException,
 
 
 class BasePage:
+    """Base Page Object."""
+
+    locators = BasePageLocators()
+
     def __init__(self,
                  browser: Chrome | Firefox,
                  url: str,
@@ -22,8 +28,19 @@ class BasePage:
         if timeout:
             self.browser.implicitly_wait(timeout)
 
-    def open(self):
-        self.browser.get(self.url)
+    def go_to_login_page(self):
+        login_link = self.browser.find_element(*self.locators.LOGIN_LINK)
+        login_link.click()
+
+    def is_disappeared(self, by_attr, selector, timeout=4):
+        try:
+            WebDriverWait(self.browser, timeout, poll_frequency=1).until_not(
+                EC.presence_of_element_located((by_attr, selector))
+            )
+        except TimeoutException:
+            return False
+
+        return True
 
     def is_element_present(self, by_attr, selector) -> bool:
         try:
@@ -43,15 +60,12 @@ class BasePage:
 
         return False
 
-    def is_disappeared(self, by_attr, selector, timeout=4):
-        try:
-            WebDriverWait(self.browser, timeout, poll_frequency=1).until_not(
-                EC.presence_of_element_located((by_attr, selector))
-            )
-        except TimeoutException:
-            return False
+    def open(self):
+        self.browser.get(self.url)
 
-        return True
+    def should_be_login_link(self):
+        assert self.is_element_present(*self.locators.LOGIN_LINK), \
+            "Login link was not found."
 
     def solve_quiz_and_get_code(self):
         """Solve the quiz and get the code in the course task."""

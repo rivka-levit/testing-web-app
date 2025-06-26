@@ -5,13 +5,18 @@ Locators for Page Object classes.
 from selenium.webdriver.common.by import By
 
 
-class MainPageLocators:
-    """Locators for MainPage class."""
+class BasePageLocators:
+    """Base class for Page Locators."""
 
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
 
 
-class LoginPageLocators :
+class MainPageLocators(BasePageLocators):
+    """Locators for MainPage class."""
+
+
+class LoginPageLocators(BasePageLocators):
     """Locators for LoginPage class."""
 
     # Login form locators
@@ -28,7 +33,7 @@ class LoginPageLocators :
     BTN_REGISTER = (By.CSS_SELECTOR, "button[value='Register']")
 
 
-class ProductPageLocators :
+class ProductPageLocators(BasePageLocators):
     """Locators for ProductPage class."""
 
     BTN_ADD_TO_CART = (By.CSS_SELECTOR, "button.btn-add-to-basket")
