@@ -9,10 +9,9 @@ from pages.login_page import LoginPage
 from pages.product_page import ProductPage
 from pages.cart_page import CartPage
 
-# LINK = 'http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/'
 LINK = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/'
 
-# Link to solve course task
+# Links to solve quiz
 # LINK = 'http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear'
 # LINK = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019'
 
@@ -24,8 +23,6 @@ links_to_check = [f'{LINK}?promo=offer{i}' if i not in failed_links_numbers else
                   ) for i in range(0, 10)]
 
 
-
-
 def test_product_info_is_visible(browser):
     """Test the product info is displayed correctly."""
 
@@ -34,7 +31,9 @@ def test_product_info_is_visible(browser):
     page.should_be_product_name()
     page.should_be_product_price()
 
+
 # @pytest.mark.parametrize('link', links_to_check)
+@pytest.mark.need_review
 def test_guest_can_add_product_to_cart(browser):
     """Test that guest can add product to the cart."""
 
@@ -62,6 +61,7 @@ def test_guest_cant_see_success_message(browser):
     page.open()
     page.should_not_be_success_message()
 
+
 @pytest.mark.xfail
 def test_message_disappeared_after_adding_product_to_basket(browser):
     """Test the success message disappeared after adding product to the cart."""
@@ -82,6 +82,7 @@ def test_guest_should_see_login_link_on_product_page(browser):
     page.should_be_login_link()
 
 
+@pytest.mark.need_review
 def test_guest_can_go_to_login_page_from_product_page(browser):
     """Test the guest can go to the login page."""
 
@@ -92,6 +93,7 @@ def test_guest_can_go_to_login_page_from_product_page(browser):
     login_page.should_be_login_page()
 
 
+@pytest.mark.need_review
 def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     """
     Test the guest cannot see a product in the cart opened from the
@@ -120,6 +122,7 @@ class TestUserAddToBasketFromProductPage:
         page.register_new_user(email, 'test_password_123')
         page.should_be_authorized_user()
 
+    @pytest.mark.need_review
     def test_user_can_add_product_to_basket(self, browser):
         """Test that user can add a product to the cart."""
 
