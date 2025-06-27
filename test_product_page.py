@@ -5,9 +5,9 @@ Tests for product detail page.
 import pytest
 import time
 
-from .pages.login_page import LoginPage
-from .pages.product_page import ProductPage
-from .pages.basket_page import CartPage
+from pages.login_page import LoginPage
+from pages.product_page import ProductPage
+from pages.basket_page import CartPage
 
 LINK = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/'
 
