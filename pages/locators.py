@@ -11,6 +11,7 @@ class BasePageLocators:
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
     CART_LINK = (By.CSS_SELECTOR, "header .page_inner a.btn")
+    USER_ICON = (By.CSS_SELECTOR, ".icon-user")
 
 
 class MainPageLocators(BasePageLocators):
@@ -29,8 +30,8 @@ class LoginPageLocators(BasePageLocators):
     # Registration form locators
     REGISTER_FORM = (By.ID, "register_form")
     REGISTER_EMAIL = (By.ID, "id_registration-email")
-    REGISTER_PASSWORD_1 = (By.ID, "registration-password1")
-    REGISTER_PASSWORD_2 = (By.ID, "registration-password2")
+    REGISTER_PASSWORD_1 = (By.ID, "id_registration-password1")
+    REGISTER_PASSWORD_2 = (By.ID, "id_registration-password2")
     BTN_REGISTER = (By.CSS_SELECTOR, "button[value='Register']")
 
 

@@ -3,6 +3,7 @@ Tests for product detail page.
 """
 
 import pytest
+import time
 
 from pages.login_page import LoginPage
 from pages.product_page import ProductPage
@@ -104,3 +105,37 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     cart_page.should_be_cart_url()
     cart_page.should_not_be_cart_item()
     cart_page.should_be_empty_cart_text()
+
+
+class TestUserAddToBasketFromProductPage:
+    """Test authorized user adding to the cart from product page."""
+
+    @pytest.fixture(scope="function", autouse=True)
+    def setup(self, browser):
+        link = 'http://selenium1py.pythonanywhere.com/ru/accounts/login/'
+        email = f'{str(time.time())}@example.com'
+
+        page = LoginPage(browser, link)
+        page.open()
+        page.register_new_user(email, 'test_password_123')
+        page.should_be_authorized_user()
+
+    def test_user_can_add_product_to_basket(self, browser):
+        """Test that user can add a product to the cart."""
+
+        page = ProductPage(browser, LINK)
+        page.open()
+        page.add_to_cart()
+        page.should_be_success_message()
+        page.should_be_correct_product_in_success_message()
+        page.should_be_cart_total_message()
+        page.should_match_cart_total_msg_to_product_price()
+
+    @pytest.mark.xfail
+    def test_user_cant_see_success_message(self, browser):
+        """User does not see a success message after adding product to the cart."""
+
+        page = ProductPage(browser, LINK, timeout=None)
+        page.open()
+        page.add_to_cart()
+        page.should_not_be_success_message()
