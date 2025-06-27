@@ -5,9 +5,9 @@ Tests for product detail page.
 import pytest
 import time
 
-from pages.login_page import LoginPage
-from pages.product_page import ProductPage
-from pages.cart_page import CartPage
+from .pages.login_page import LoginPage
+from .pages.product_page import ProductPage
+from .pages.basket_page import CartPage
 
 LINK = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/'
 
@@ -15,6 +15,7 @@ LINK = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/'
 # LINK = 'http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear'
 # LINK = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019'
 
+# List of promo links with quiz for parametrize.
 failed_links_numbers = [7]
 links_to_check = [f'{LINK}?promo=offer{i}' if i not in failed_links_numbers else
                   pytest.param(
